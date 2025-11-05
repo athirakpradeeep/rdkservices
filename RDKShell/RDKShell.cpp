@@ -7706,6 +7706,13 @@ namespace WPEFramework {
 
         bool RDKShell::setVisibility(const string& client, const bool visible)
         {
+            if (client == "factoryapp")
+            {
+                if (m_factoryAppVisibleInitialized  && m_factoryAppVisibility == visible)
+                {
+                   return true;
+                }
+            }
             bool ret = false;
             {
                 bool lockAcquired = false;
@@ -7725,6 +7732,11 @@ namespace WPEFramework {
                 }
             }
             ret = CompositorController::setVisibility(client, visible);
+            if (client == "factoryapp" && ret)
+            {
+               m_factoryAppVisibility = visible;
+               m_factoryAppVisibleInitialized = true;
+            }
             gRdkShellMutex.unlock();
             
             bool isApplicationBeingDestroyed = false;

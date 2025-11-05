@@ -365,6 +365,8 @@ namespace WPEFramework {
         private:
             static std::shared_ptr<WPEFramework::JSONRPC::LinkType<WPEFramework::Core::JSON::IElement> > getPackagerPlugin();
             static std::shared_ptr<WPEFramework::JSONRPC::LinkType<WPEFramework::Core::JSON::IElement> > getOCIContainerPlugin();
+            bool m_factoryAppVisibility;
+            bool m_factoryAppVisibleInitialized = false;
 
         private/*classes */:
 
